@@ -21,15 +21,16 @@ export class Searchbar extends Component {
 
   render() {
     return (
-      <SearchHeader>
-        <SearchForm onSubmit={this.handleSubmit}>
-          <SearchButton type="submit">
+      <SearchHeader className="search-header">
+        <SearchForm className="search-form" onSubmit={this.handleSubmit}>
+          <SearchButton className="button" type="submit">
             <BsSearch />
           </SearchButton>
-          <SearchLabel>
-            <span>Search</span>
+          <SearchLabel className="button-label">
+            <span className="search-span">Search</span>
           </SearchLabel>
           <SearchFormInput
+            className="input"
             type="text"
             value={this.state.input}
             placeholder="Search images"

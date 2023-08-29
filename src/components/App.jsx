@@ -5,6 +5,8 @@ import { Searchbar } from './Searchbar/Searchbar';
 import { Loader } from './Loader/Loader';
 import { Button } from './Button/Button';
 import { ImageModal } from './ImageModal/ImageModal';
+import { fetchImages } from 'FetchApi/FetchApi';
+import Notiflix from 'notiflix';
 
 export const App = () => {
   const [images, setImages] = useState([]);
@@ -27,7 +29,9 @@ export const App = () => {
         setImages(prevImages => [...prevImages, ...data.hits]);
         setLoadMore(page * 12 < data.totalHits);
       } catch (error) {
-        console.error(error);
+        Notiflix.Notify.failure(
+          'Failed to fetch images. Please try again later.'
+        );
       } finally {
         setIsLoading(false);
       }
@@ -39,7 +43,7 @@ export const App = () => {
     setIsModalOpen(prevIsModalOpen => !prevIsModalOpen);
     setDataModal({ image, alt });
   };
-  const changePage = (image, alt) => {
+  const changePage = () => {
     setPage(prevPage => prevPage + 1);
   };
   const handleSubmit = query => {

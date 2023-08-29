@@ -11,6 +11,3 @@ export async function fetchImages(query, page = 1) {
 
   return response.data;
 }
-// https://pixabay.com/api/?q=dog&page=1&key=37549280-c708feca670f76edfee67d8a3&image_type=photo&orientation=horizontal&per_page=12
-
-// https://pixabay.com/api/?q=cat&page=1&key=37549280-c708feca670f76edfee67d8a3&image_type=photo&orientation=horizontal&per_page=12

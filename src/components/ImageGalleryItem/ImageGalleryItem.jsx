@@ -6,7 +6,10 @@ export class ImageGalleryItem extends Component {
     const { image, openModal } = this.props;
 
     return (
-      <ImgGalleryItem onClick={e => openModal(image.largeImageURL, image.tags)}>
+      <ImgGalleryItem
+        className="gallery-item"
+        onClick={e => openModal(image.largeImageURL, image.tags)}
+      >
         <ImgGalleryImage src={image.webformatURL} alt={image.tags} />
       </ImgGalleryItem>
     );
