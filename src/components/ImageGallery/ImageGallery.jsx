@@ -9,32 +9,6 @@ import { Loader } from '../Loader/Loader';
 import { ImageModal } from '../ImageModal/ImageModal';
 
 export class ImageGallery extends Component {
-  state = {
-    images: [],
-    query: '',
-    loadMore: false,
-    page: 1,
-    error: null,
-    isLoading: false,
-    isModalOpen: false,
-    dataModal: {
-      image: '',
-      alt: '',
-    },
-  };
-
-  static getDerivedStateFromProps(props, state) {
-    const { query } = props;
-    if (query !== state.query) {
-      return { page: 1, query, images: [] };
-    }
-    return null;
-  }
-
-  getSnapshotBeforeUpdate() {
-    return document.body.clientHeight + 72;
-  }
-
   componentDidUpdate(prevProps, prevState, snapshot) {
     if (
       (prevProps.query !== this.props.query && this.props.query) ||
@@ -50,36 +24,7 @@ export class ImageGallery extends Component {
     }
   }
 
-  getSearchedImages = async () => {
-    this.setState({ isLoading: true });
-    try {
-      const data = await fetchImages(this.props.query, this.state.page);
-      this.setState(prev => ({ images: [...prev.images, ...data.hits] }));
-      if (this.state.page * 12 < data.totalHits) {
-        this.setState(() => ({ loadMore: true }));
-      } else {
-        this.setState(() => ({ loadMore: false }));
-      }
-    } catch (error) {
-      this.setState({ error: error.message });
-    } finally {
-      this.setState({ isLoading: false });
-    }
-  };
-
-  changePage = () => {
-    this.setState(prev => ({ page: prev.page + 1 }));
-  };
-
-  openModal = (image, alt) => {
-    this.setState(({ isModalOpen }) => ({
-      isModalOpen: !isModalOpen,
-      dataModal: { image, alt },
-    }));
-  };
-
   render() {
-    const { images, isLoading, loadMore, isModalOpen, dataModal } = this.state;
     return (
       <>
         <ImgGallery className="gallery">
